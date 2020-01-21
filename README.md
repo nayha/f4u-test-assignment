@@ -10,7 +10,7 @@ Run tests:
 ```
 
 Output:
-![Console Output Result](http://img.webmyanmar.net/kode/data/User/admin/home/document/Screencast_Output_Console.mp4)
+[![Console Output Result](http://img.webmyanmar.net/kode/data/User/admin/home/document/Screencast_Output_Console.png)](http://img.webmyanmar.net/kode/data/User/admin/home/document/Screencast_Output_Console.mp4)
 
 Let's say, in our system we have two models "client" and "shipping address". Let's assume that we already have some existing (registered) clients in our storage. Let's do this simple and assume that our clients have only three properties ID, firstname and lastname.
 
