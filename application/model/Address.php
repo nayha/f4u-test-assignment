@@ -4,6 +4,8 @@ namespace Ddd\Project;
 
 require_once "./application/service/Storage.php";
 
+use Ddd\Project\Storage;
+
 Class Address {
     private $storage = array();
     private $addressList = array();
@@ -17,6 +19,11 @@ Class Address {
         $addresses = $this->storage->load("./storage/addresses.json");
 
         return $addresses;
+    }
+
+    public function updateFile () {
+        // write to file
+        $this->storage->write("./storage/addresses.json", $this->addressList);
     }
 
     public function getAddressList () {
@@ -44,7 +51,7 @@ Class Address {
 
     public function add ($clientId, $address) {
         // if new address is a default address, check if default address exists then update it to 0
-        if (array_key_exists((string)$clientId, $this->addressList) && !empty($this->addressList[$clientId])) {
+        if (array_key_exists($clientId, $this->addressList) && !empty($this->addressList[$clientId])) {
             if (!(count($this->addressList[$clientId]) < MAX_ADDRESS_NUM)) {
                 throw new Exception("Exceeds maximum number of addresses allowed");
             }
@@ -54,13 +61,15 @@ Class Address {
 
                 // add default address to the first element
                 array_unshift($this->addressList[$clientId], $address);
+            } else {
+                $this->addressList[$clientId][] = $address;
             }
         } else {
             $this->addressList[$clientId][] = $address;
         }
 
         // write to file
-        $this->storage->write("./storage/addresses.json", $this->addressList);
+        $this->updateFile();
 
         return $this->addressList[$clientId];
     }
@@ -82,6 +91,8 @@ Class Address {
             $this->addressList[$clientId][$addressId] = $address;
         }
 
+        $this->updateFile();
+
         return $this->addressList[$clientId];
     }
 
@@ -93,6 +104,8 @@ Class Address {
         }
 
         $this->addressList[$clientId] = array_values($this->addressList[$clientId]);
+
+        $this->updateFile();
 
         return $this->addressList[$clientId];
     }

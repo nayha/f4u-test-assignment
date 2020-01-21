@@ -3,6 +3,9 @@
 require_once "./application/model/Client.php";
 require_once "./application/model/Address.php";
 
+use Ddd\Project\Client;
+use Ddd\Project\Address;
+
 Class Console {
 
     public function __construct () {

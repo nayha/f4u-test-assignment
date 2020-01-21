@@ -4,6 +4,8 @@ namespace Ddd\Project;
 
 require_once "./application/service/Storage.php";
 
+use Ddd\Project\Storage;
+
 Class Client {
     private $storage = array();
 
